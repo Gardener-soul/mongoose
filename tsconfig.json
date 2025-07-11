@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES6",              // JavaScript 타겟 버전 (ES6 권장)
+    "module": "CommonJS",         // 모듈 시스템 (Node.js 환경에서는 CommonJS가 일반적)
+    "rootDir": "./src",           // 소스 파일 루트 디렉터리
+    "outDir": "./dist",           // 컴파일된 JavaScript 파일 출력 디렉터리
+    "esModuleInterop": true,      // ES 모듈 상호 운용성 활성화
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,               // 모든 strict 타입 검사 활성화
+    "skipLibCheck": true,
+    "resolveJsonModule": true,    // JSON 파일 import 지원
+    "experimentalDecorators": true, // 데코레이터 사용 허용 (Mongoose 모델에서 사용 시 유용)
+    "emitDecoratorMetadata": true   // 데코레이터 메타데이터 생성 (Mongoose 모델에서 사용 시 유용)
+  },
+  "include": ["src/**/*"],        // 컴파일 포함 파일
+  "exclude": ["node_modules", "**/*.spec.ts"] // 컴파일 제외 파일
+}

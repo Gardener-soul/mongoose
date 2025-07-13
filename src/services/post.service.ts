@@ -4,6 +4,7 @@ import { IPost } from "../schema/post.model";
 export class PostService {
     constructor(private readonly repo: PostRepository = new PostRepository()) {}
 
+    // data transfer object, Partial<IPost>는 IPost의 부분적인 타입
     create(dto: Partial<IPost>) {
       return this.repo.create(dto);
     }

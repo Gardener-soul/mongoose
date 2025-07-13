@@ -8,6 +8,8 @@ export class PostRepository extends BaseRepository<IPost> {
   }
 
   async findByAuthor(authorId: string) {
+   // 그 결과를 Mongoose 문서가 아닌 일반 JavaScript 객체로 받고, 
+   // 이 작업을 비동기적으로 실행하여 그 결과를 Promise로 반환하라는 의미
     return this.model.find({ author: authorId }).lean<IPost>().exec();
   }
 
@@ -43,7 +45,7 @@ export class PostRepository extends BaseRepository<IPost> {
     ).exec();
   }
 
-  // Aggregation 메서드 1: 인기 게시글 분석 (여러 pipeline 사용)
+  // Aggregation 메서드 1: 인기 게시글 분석
   async getPopularPostsAnalysis() {
     return this.model.aggregate([
       // 1단계: 기본 필터링 (조회수나 좋아요가 있는 게시글만)
@@ -97,7 +99,7 @@ export class PostRepository extends BaseRepository<IPost> {
     ]).exec();
   }
 
-  // Aggregation 메서드 2: 카테고리별 통계 분석 (복잡한 pipeline)
+  // Aggregation 메서드 2: 카테고리별 통계 분석
   async getCategoryStatistics() {
     return this.model.aggregate([
       // 1단계: 카테고리가 있는 게시글만 필터링
@@ -127,7 +129,7 @@ export class PostRepository extends BaseRepository<IPost> {
           latestPost: { $max: "$createdAt" }
         }
       },
-      // 4단계: 카테고리 정보 조인 (populate 대신 lookup 사용)
+      // 4단계: 카테고리 정보 조인
       {
         $lookup: {
           from: "categories",

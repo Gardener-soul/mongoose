@@ -1,8 +1,14 @@
 import { Router } from "express";
 import * as post from "../controllers/postController";
+import * as tag from "../controllers/postController";
 
 export const postRouter = Router();
+export const tagRouter = Router();
 
+// Tag Router
+tagRouter.post("/", tag.createTag);
+
+// Post Router
 postRouter.post("/", post.createPost);
 postRouter.get("/", post.getAllPosts);
 postRouter.get("/:id", post.getPostById);

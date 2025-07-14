@@ -1,5 +1,5 @@
 import { BaseRepository } from "./base.repo";
-import { IPost } from "../schema/post.model";
+import { IPost, ITag } from "../schema/post.model";
 import { Post } from "../schema";
 
 export class PostRepository extends BaseRepository<IPost> {
@@ -167,5 +167,9 @@ export class PostRepository extends BaseRepository<IPost> {
         }
       }
     ]).exec();
+  }
+
+  async createTag(dto: Partial<ITag>) {
+    return this.model.create(dto);
   }
 }

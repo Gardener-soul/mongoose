@@ -1,11 +1,19 @@
 import { Request, Response } from "express";
 import { CommentService } from "../services/comment.service";
+import { Post } from "../schema";
 
 const commentService = new CommentService();
 
 export const createComment = async (req: Request, res: Response) => {
   try {
     const comment = await commentService.create(req.body);
+    // 댓글 생성 후, 해당 Post의 comments 배열에 댓글 ID 추가
+    if (comment && comment.post) {
+      await Post.findByIdAndUpdate(
+        comment.post,
+        { $push: { comments: comment._id } }
+      );
+    }
     res.status(201).json(comment);
   } catch (err) {
     res.status(400).json({ error: (err as Error).message });

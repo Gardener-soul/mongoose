@@ -1,5 +1,5 @@
 import { PostRepository } from "../repositories/post.repo";
-import { IPost } from "../schema/post.model";
+import { IPost, ITag } from "../schema/post.model";
 
 export class PostService {
     constructor(private readonly repo: PostRepository = new PostRepository()) {}
@@ -57,5 +57,8 @@ export class PostService {
     getCategoryStatistics() {
       return this.repo.getCategoryStatistics();
     }
-
+    
+    createTag(dto: Partial<ITag>) {
+      return this.repo.createTag(dto);
+    }
 }

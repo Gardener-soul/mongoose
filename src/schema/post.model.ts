@@ -13,6 +13,7 @@ export interface IPost extends Document { // Mongoose 모델에서 사용될 것
   content: string;
   tags: ITag[]; // ITag의 요소들이 배열 형태로 저장됨.
   commentCount: number;
+  comments: Types.ObjectId[];
   views: number;
   likes: number;
   createdAt: Date;
@@ -36,6 +37,7 @@ export const postSchema = new Schema<IPost>(
     content: { type: String, required: true },
     tags: [tagSubSchema],
     commentCount: { type: Number, default: 0 },
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }], // 댓글 ObjectId 배열
     views: { type: Number, default: 0 },
     likes: { type: Number, default: 0 },
   },

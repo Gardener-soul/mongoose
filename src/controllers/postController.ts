@@ -124,3 +124,13 @@ export const getCategoryStatistics = async (_: Request, res: Response) => {
     res.status(400).json({ error: (err as Error).message });
   }
 };
+
+export const createTag = async (req: Request, res:Response) => {
+  try{
+    const tag = await postService.createTag(req.body);
+    res.status(201).json(tag);
+  } catch(e) {
+    console.log(e);
+    res.status(400).json({ error: (e as Error).message });
+  }
+}
